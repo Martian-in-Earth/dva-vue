@@ -1,0 +1,25 @@
+{
+    "env": {
+        "cjs": {
+            "presets": [
+                ["env", {
+                    "targets": {
+                        "browsers": ["last 2 versions", "safari >= 7"]
+                    },
+                    "loose": true
+                }], "stage-0"
+            ]
+        },
+        "es": {
+            "presets": [
+                ["env", {
+                    "targets": {
+                        "browsers": ["last 2 versions", "safari >= 7"]
+                    },
+                    "loose": true,
+                    "modules": false
+                }], "stage-0"
+            ]
+        }
+    }
+}
