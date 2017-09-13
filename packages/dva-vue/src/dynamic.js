@@ -10,7 +10,7 @@ export default function dynamic (config) {
   const { app, models: resolveModels, component: resolveComponent } = config
   const models = typeof resolveModels === 'function' ? resolveModels() : []
   const component = resolveComponent()
-  return new Promise((resolve) => {
+  return () => new Promise((resolve) => {
     Promise.all([...models, component]).then((ret) => {
       if (!models || !models.length) {
         return resolve(ret[0])

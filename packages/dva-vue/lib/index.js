@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.connect = undefined;
+exports.dynamic = exports.connect = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -11,6 +11,15 @@ Object.defineProperty(exports, 'connect', {
   enumerable: true,
   get: function get() {
     return _interopRequireDefault(_connect).default;
+  }
+});
+
+var _dynamic = require('./dynamic');
+
+Object.defineProperty(exports, 'dynamic', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_dynamic).default;
   }
 });
 
@@ -44,18 +53,18 @@ exports.default = function () {
   var createOpts = {
     setupApp: function setupApp(app) {
       _vue2.default.use(_vueRouter2.default);
-      var router = new _vueRouter2.default({
-        mode: mode
+      app._router = new _vueRouter2.default({
+        mode: mode,
+        routes: app._router({ app: app, history: app._history })
       });
-      app._history = patchHistory(router.history);
-      router.addRoutes(app._router({ app: app, history: app._history }));
-      app._router = router;
+      app._history = patchHistory(app._router.history);
     }
   };
   var app = core.create(opts, createOpts);
   var oldAppStart = app.start;
   app.router = router;
   app.start = start;
+  app.plugin = _vue2.default.use;
   return app;
 };
 
@@ -95,12 +104,11 @@ var patchHistory = function patchHistory(history) {
   };
   return history;
 };
-
 var render = function render(container, store, app, router) {
   new _vue2.default({
     router: router,
+    store: store,
     render: function render(h) {
-      this._props = store;
       return h('router-view');
     }
   }).$mount(container);

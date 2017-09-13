@@ -1,0 +1,14 @@
+{
+  "lerna": "2.1.2",
+  "commands": {
+    "publish": {
+      "ignore": [
+        "dva-vue-example"
+      ]
+    }
+  },
+  "packages": [
+    "packages/*"
+  ],
+  "version": "0.0.0"
+}

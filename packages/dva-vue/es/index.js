@@ -6,6 +6,7 @@ import * as core from 'dva-core';
 import { isFunction } from 'dva-core/lib/utils';
 import VueRouter from 'vue-router';
 export { default as connect } from './connect';
+export { default as dynamic } from './dynamic';
 
 var isHTMLElement = function isHTMLElement(node) {
   return (typeof node === 'undefined' ? 'undefined' : _typeof(node)) === 'object' && node !== null && node.nodeType && node.nodeName;
@@ -21,12 +22,11 @@ var patchHistory = function patchHistory(history) {
   };
   return history;
 };
-
 var render = function render(container, store, app, router) {
   new Vue({
     router: router,
+    store: store,
     render: function render(h) {
-      this._props = store;
       return h('router-view');
     }
   }).$mount(container);
@@ -62,17 +62,17 @@ export default function () {
   var createOpts = {
     setupApp: function setupApp(app) {
       Vue.use(VueRouter);
-      var router = new VueRouter({
-        mode: mode
+      app._router = new VueRouter({
+        mode: mode,
+        routes: app._router({ app: app, history: app._history })
       });
-      app._history = patchHistory(router.history);
-      router.addRoutes(app._router({ app: app, history: app._history }));
-      app._router = router;
+      app._history = patchHistory(app._router.history);
     }
   };
   var app = core.create(opts, createOpts);
   var oldAppStart = app.start;
   app.router = router;
   app.start = start;
+  app.plugin = Vue.use;
   return app;
 }
