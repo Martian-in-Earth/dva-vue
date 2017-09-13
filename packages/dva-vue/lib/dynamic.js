@@ -17,17 +17,19 @@ function dynamic(config) {
 
   var models = typeof resolveModels === 'function' ? resolveModels() : [];
   var component = resolveComponent();
-  return new Promise(function (resolve) {
-    Promise.all([].concat(models, [component])).then(function (ret) {
-      if (!models || !models.length) {
-        return resolve(ret[0]);
-      } else {
-        var len = models.length;
-        ret.slice(0, len).forEach(function (m) {
-          registerModel(app, m);
-        });
-        resolve(ret[len]);
-      }
+  return function () {
+    return new Promise(function (resolve) {
+      Promise.all([].concat(models, [component])).then(function (ret) {
+        if (!models || !models.length) {
+          return resolve(ret[0]);
+        } else {
+          var len = models.length;
+          ret.slice(0, len).forEach(function (m) {
+            registerModel(app, m);
+          });
+          resolve(ret[len]);
+        }
+      });
     });
-  });
+  };
 }

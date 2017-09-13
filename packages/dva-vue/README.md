@@ -8,4 +8,6 @@ dva-vue
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
 
----
+## LICENSE
+
+MIT

@@ -1,4 +1,13 @@
 {
+    "presets": [
+        ["env", {
+            "targets": {
+                "browsers": ["last 2 versions", "safari >= 7"]
+            },
+            "loose": true,
+            "modules": false
+        }], "stage-0"
+    ],
     "env": {
         "cjs": {
             "presets": [
