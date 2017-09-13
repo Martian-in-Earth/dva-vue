@@ -5,6 +5,7 @@ import invariant from 'invariant';
 import * as core from 'dva-core';
 import { isFunction } from 'dva-core/lib/utils';
 import VueRouter from 'vue-router';
+import { routerMiddleware } from './middleware';
 export { default as connect } from './connect';
 export { default as dynamic } from './dynamic';
 
@@ -36,9 +37,18 @@ export default function () {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var mode = opts.mode || 'hash';
-  var router = function router(_router) {
-    invariant(isFunction(_router), '[app.router] router should be function, but got ' + (typeof _router === 'undefined' ? 'undefined' : _typeof(_router)));
-    app._router = _router;
+  var _router = new VueRouter({ mode: mode });
+  var createOpts = {
+    setupMiddlewares: function setupMiddlewares(middlewares) {
+      return [routerMiddleware(_router.history)].concat(middlewares);
+    },
+    setupApp: function setupApp(app) {
+      Vue.use(VueRouter);
+    }
+  };
+  var router = function router(_router2) {
+    invariant(isFunction(_router2), '[app.router] router should be function, but got ' + (typeof _router2 === 'undefined' ? 'undefined' : _typeof(_router2)));
+    (app._router = _router).addRoutes(_router2({ app: app, history: app._history = _router.history }));
   };
   var start = function start(container) {
     // 允许 container 是字符串，然后用 querySelector 找元素
@@ -57,16 +67,6 @@ export default function () {
       render(container, store, app, app._router);
     } else {
       return '';
-    }
-  };
-  var createOpts = {
-    setupApp: function setupApp(app) {
-      Vue.use(VueRouter);
-      app._router = new VueRouter({
-        mode: mode,
-        routes: app._router({ app: app, history: app._history })
-      });
-      app._history = patchHistory(app._router.history);
     }
   };
   var app = core.create(opts, createOpts);

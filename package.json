@@ -1,23 +1,22 @@
 {
-  "name": "dva-vue",
-  "version": "1.0.0",
-  "description": "dva-vue",
-  "main": "index.js",
-  "dependencies": {
-    "lerna": "^2.1.2"
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.6.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-html": "^3.2.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "lerna": "^2.1.2",
+    "lerna-changelog": "^0.6.0"
   },
+  "private": true,
   "scripts": {
+    "changelog": "lerna-changelog",
+    "example": "cd packages/dva-vue-example && npm run start",
+    "build": "lerna run build  --ignore=dva-vue-example",
     "bootstrap": "lerna bootstrap",
     "publish": "lerna publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Jetsly/dva-vue.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Jetsly/dva-vue/issues"
-  },
-  "homepage": "https://github.com/Jetsly/dva-vue#readme"
+  }
 }

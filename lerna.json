@@ -10,5 +10,16 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.0.1"
+  "changelog": {
+    "repo": "dva-vue/dva-vue",
+    "labels": {
+      "tag: new feature": ":rocket: New Feature",
+      "tag: breaking change": ":boom: Breaking Change",
+      "tag: bug fix": ":bug: Bug Fix",
+      "tag: enhancement": ":nail_care: Enhancement",
+      "tag: documentation": ":memo: Documentation"
+    },
+    "cacheDir": ".changelog"
+  },
+  "version": "independent"
 }

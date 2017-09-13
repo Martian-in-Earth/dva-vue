@@ -20,12 +20,12 @@ describe('connect', () => {
     app.router(() => [{ path: '/',
       component: connect(({count}) => ({count}))({
         render (h) {
-          console.log(this.$root.$props)
+          this.dispatch({type: 'count/add'})
           return h('div')
         }
       })
     }])
     app.start('#root')
-    expect(app._store.getState().count).equal(0)
+    expect(app._store.getState().count).equal(1)
   })
 })
