@@ -1,4 +1,4 @@
-dva-vue
+# dva-vue
 
 [![NPM version](https://img.shields.io/npm/v/dva-vue.svg?style=flat)](https://npmjs.org/package/dva-vue)
 [![Build Status](https://img.shields.io/travis/jetsly/dva-vue.svg?style=flat)](https://travis-ci.org/jetsly/dva-vue)
@@ -8,8 +8,7 @@ dva-vue
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-Official Vue bindings for dva, with vue-router@2.7.0.
-
+Official Vue bindings for [dva-core](https://github.com/dvajs/dva/tree/master/packages/dva-core), with [vue-router@2.7.0](https://github.com/vuejs/vue-router)
 ## LICENSE
 
 MIT

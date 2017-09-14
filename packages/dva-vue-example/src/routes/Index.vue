@@ -9,7 +9,7 @@
     export default connect(({index}) => ({index}))({
       methods: {
         down () {
-          this.dispatch({type: 'index/getUser', payload: 'aa'}).then(res=>console.log(res))
+          this.dispatch({type: 'index/getUser', payload: 'aa'}).then(()=>console.log('done'))
         }
       }
     })
