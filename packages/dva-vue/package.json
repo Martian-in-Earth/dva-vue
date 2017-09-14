@@ -1,6 +1,6 @@
 {
   "name": "dva-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "dva-vue",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -54,5 +54,4 @@
     "url": "https://github.com/Jetsly/dva-vue/issues"
   },
   "homepage": "https://github.com/Jetsly/dva-vue#readme"
-  
 }
