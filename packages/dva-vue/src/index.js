@@ -9,14 +9,6 @@ export { default as dynamic } from './dynamic'
 
 const isHTMLElement = node => typeof node === 'object' && node !== null && node.nodeType && node.nodeName
 const isString = str => typeof str === 'string'
-const patchHistory = history => {
-  const oldListen = history.listen
-  history.listen = (callback) => {
-    callback(history.location)
-    return oldListen.call(history, callback)
-  }
-  return history
-}
 const render = (container, store, app, router) => {
   new Vue({
     router,

@@ -97,14 +97,6 @@ var isHTMLElement = function isHTMLElement(node) {
 var isString = function isString(str) {
   return typeof str === 'string';
 };
-var patchHistory = function patchHistory(history) {
-  var oldListen = history.listen;
-  history.listen = function (callback) {
-    callback(history.location);
-    return oldListen.call(history, callback);
-  };
-  return history;
-};
 var render = function render(container, store, app, router) {
   new _vue2.default({
     router: router,

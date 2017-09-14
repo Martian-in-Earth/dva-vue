@@ -16,6 +16,7 @@
     "changelog": "lerna-changelog",
     "example": "cd packages/dva-vue-example && npm run start",
     "build": "lerna run build  --ignore=dva-vue-example",
+    "lint": "eslint --ext .js packages",
     "bootstrap": "lerna bootstrap",
     "publish": "lerna publish"
   }

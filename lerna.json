@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "changelog": {
-    "repo": "dva-vue/dva-vue",
+    "repo": "Jetsly/dva-vue",
     "labels": {
       "tag: new feature": ":rocket: New Feature",
       "tag: breaking change": ":boom: Breaking Change",
