@@ -27,9 +27,18 @@ exports.default = function () {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
   var mode = opts.mode || 'hash';
-  var router = function router(_router) {
-    (0, _invariant2.default)((0, _utils.isFunction)(_router), '[app.router] router should be function, but got ' + (typeof _router === 'undefined' ? 'undefined' : _typeof(_router)));
-    app._router = _router;
+  var _router = new _vueRouter2.default({ mode: mode });
+  var createOpts = {
+    setupMiddlewares: function setupMiddlewares(middlewares) {
+      return [(0, _middleware.routerMiddleware)(_router.history)].concat(middlewares);
+    },
+    setupApp: function setupApp(app) {
+      _vue2.default.use(_vueRouter2.default);
+    }
+  };
+  var router = function router(_router2) {
+    (0, _invariant2.default)((0, _utils.isFunction)(_router2), '[app.router] router should be function, but got ' + (typeof _router2 === 'undefined' ? 'undefined' : _typeof(_router2)));
+    (app._router = _router).addRoutes(_router2({ app: app, history: app._history = _router.history }));
   };
   var start = function start(container) {
     // 允许 container 是字符串，然后用 querySelector 找元素
@@ -48,16 +57,6 @@ exports.default = function () {
       render(container, store, app, app._router);
     } else {
       return '';
-    }
-  };
-  var createOpts = {
-    setupApp: function setupApp(app) {
-      _vue2.default.use(_vueRouter2.default);
-      app._router = new _vueRouter2.default({
-        mode: mode,
-        routes: app._router({ app: app, history: app._history })
-      });
-      app._history = patchHistory(app._router.history);
     }
   };
   var app = core.create(opts, createOpts);
@@ -85,6 +84,8 @@ var _utils = require('dva-core/lib/utils');
 var _vueRouter = require('vue-router');
 
 var _vueRouter2 = _interopRequireDefault(_vueRouter);
+
+var _middleware = require('./middleware');
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 

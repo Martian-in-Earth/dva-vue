@@ -16,5 +16,8 @@ export default function RouterConfig ({
   return [{
     path: '/',
     component: asyncComponent('index')
+  }, {
+    path: '/share',
+    component: asyncComponent('share')
   }]
 }

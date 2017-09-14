@@ -3,6 +3,7 @@ import invariant from 'invariant'
 import * as core from 'dva-core'
 import { isFunction } from 'dva-core/lib/utils'
 import VueRouter from 'vue-router'
+import { routerMiddleware } from './middleware'
 export { default as connect } from './connect'
 export { default as dynamic } from './dynamic'
 
@@ -28,9 +29,21 @@ const render = (container, store, app, router) => {
 
 export default function (opts = {}) {
   const mode = opts.mode || 'hash'
+  const _router = new VueRouter({mode})
+  const createOpts = {
+    setupMiddlewares (middlewares) {
+      return [
+        routerMiddleware(_router.history),
+        ...middlewares
+      ]
+    },
+    setupApp (app) {
+      Vue.use(VueRouter)
+    }
+  }
   const router = router => {
-    invariant(isFunction(router), `[app.router] router should be function, but got ${typeof router}`)
-    app._router = router
+    invariant(isFunction(router), `[app.router] router should be function, but got ${typeof router}`);
+    (app._router = _router).addRoutes(router({ app, history: (app._history = _router.history) }))
   }
   const start = container => {
     // 允许 container 是字符串，然后用 querySelector 找元素
@@ -49,16 +62,6 @@ export default function (opts = {}) {
       render(container, store, app, app._router)
     } else {
       return ''
-    }
-  }
-  const createOpts = {
-    setupApp (app) {
-      Vue.use(VueRouter)
-      app._router = new VueRouter({
-        mode,
-        routes: app._router({ app, history: app._history })
-      })
-      app._history = patchHistory(app._router.history)
     }
   }
   const app = core.create(opts, createOpts)

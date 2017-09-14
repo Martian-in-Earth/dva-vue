@@ -6,6 +6,10 @@ app.model({
   state: {},
   subscriptions: {
     setup ({ dispatch, history }) {
+      history.router.beforeEach((to, from, next) => {
+        console.log(1)
+        next()
+      })
       // return history.block(({pathname, search}, action) => {
       //   if (action === 'REPLACE') {
       //     return true
