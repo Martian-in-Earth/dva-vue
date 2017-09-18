@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "dva-core": "^1.0.1",
+    "history": "^4.7.2",
     "invariant": "^2.2.2",
-    "vue-router": "^2.7.0"
+    "path-to-regexp": "^2.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -36,7 +37,7 @@
     "webpack": "^3.5.6"
   },
   "scripts": {
-    "clean": "rimraf dist es lib",
+    "clean": "rimraf es lib",
     "build:cjs": "cross-env BABEL_ENV=cjs babel src --out-dir lib",
     "build:es": "cross-env BABEL_ENV=es babel src --out-dir es",
     "build": "npm run clean && run-p build:**",

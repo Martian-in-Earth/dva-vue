@@ -4,10 +4,12 @@ import Vue from 'vue';
 import invariant from 'invariant';
 import * as core from 'dva-core';
 import { isFunction } from 'dva-core/lib/utils';
-import VueRouter from 'vue-router';
+import { createHashHistory } from 'history';
 import { routerMiddleware } from './middleware';
+import { Router, Link } from './router';
 export { default as connect } from './connect';
 export { default as dynamic } from './dynamic';
+export { createBrowserHistory, createHashHistory, createMemoryHistory } from 'history';
 
 var isHTMLElement = function isHTMLElement(node) {
   return (typeof node === 'undefined' ? 'undefined' : _typeof(node)) === 'object' && node !== null && node.nodeType && node.nodeName;
@@ -15,32 +17,51 @@ var isHTMLElement = function isHTMLElement(node) {
 var isString = function isString(str) {
   return typeof str === 'string';
 };
+var patchHistory = function patchHistory(history) {
+  var oldListen = history.listen;
+  history.listen = function (callback) {
+    callback(history.location);
+    return oldListen.call(history, callback);
+  };
+  return history;
+};
 var render = function render(container, store, app, router) {
-  new Vue({
-    router: router,
+  var _app = new Vue({
     store: store,
     render: function render(h) {
-      return h('router-view');
+      return h(Router, {
+        props: {
+          history: app._history,
+          routes: router({ app: app, history: app._history }),
+          store: store
+        }
+      });
     }
-  }).$mount(container);
+  });
+  // If has container, render; else, return vue component
+  if (container) {
+    _app.$mount(container);
+  } else {
+    return _app;
+  }
 };
 
 export default function () {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var mode = opts.mode || 'hash';
-  var _router = new VueRouter({ mode: mode });
+  var history = opts.history || createHashHistory();
   var createOpts = {
     setupMiddlewares: function setupMiddlewares(middlewares) {
-      return [routerMiddleware(_router.history)].concat(middlewares);
+      return [routerMiddleware(history)].concat(middlewares);
     },
     setupApp: function setupApp(app) {
-      Vue.use(VueRouter);
+      Vue.use(Link(history));
+      app._history = patchHistory(history);
     }
   };
-  var router = function router(_router2) {
-    invariant(isFunction(_router2), '[app.router] router should be function, but got ' + (typeof _router2 === 'undefined' ? 'undefined' : _typeof(_router2)));
-    (app._router = _router).addRoutes(_router2({ app: app, history: app._history = _router.history }));
+  var router = function router(_router) {
+    invariant(isFunction(_router), '[app.router] router should be function, but got ' + (typeof _router === 'undefined' ? 'undefined' : _typeof(_router)));
+    app._router = _router;
   };
   var start = function start(container) {
     // 允许 container 是字符串，然后用 querySelector 找元素
@@ -54,12 +75,7 @@ export default function () {
     invariant(app._router, '[app.start] router must be registered before app.start()');
     oldAppStart.call(app);
     var store = app._store;
-    // If has container, render; else, return vue component
-    if (container) {
-      render(container, store, app, app._router);
-    } else {
-      return '';
-    }
+    render(container, store, app, app._router);
   };
   var app = core.create(opts, createOpts);
   var oldAppStart = app.start;

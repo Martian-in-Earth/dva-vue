@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    chunkFilename: '[name].chunk.[chunkhash:7].js',
+    chunkFilename: '[name].chunk.js',
     publicPath: '/'
   },
   resolve: {

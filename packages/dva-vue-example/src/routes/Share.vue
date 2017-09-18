@@ -1,11 +1,10 @@
 <template>
     <div>aaa
-        <router-link to="/">home</router-link>
+        <dva-link to="/?c=b">home</dva-link>
     </div>
 </template>
 <script>
     import {connect} from 'dva-vue'
-export default connect(({share}) => ({share}))({
-
-})
+    export default connect(({share}) => ({share}))({
+    })
 </script>

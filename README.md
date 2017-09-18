@@ -8,7 +8,9 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-> Lightweight front-end framework based on [dva-core](https://github.com/dvajs/dva/tree/master/packages/dva-core) and [vue-router](https://github.com/vuejs/vue-router)
+[![NPM](https://nodei.co/npm/dva-vue.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/dva-vue/)
+
+> Lightweight front-end framework based on [dva-core](https://github.com/dvajs/dva/tree/master/packages/dva-core) and [history](https://github.com/ReactTraining/history)
 
 ## Demos & Plugins
 
@@ -43,9 +45,11 @@ $ npm install --save dva-vue
 </script>
 ```
 ```javascript
-import dva from 'dva-vue'
+import dva, { createHashHistory } from 'dva-vue'
 import App from 'App.vue'
-const app = dva()
+const app = dva({
+  history: createHashHistory() // 默认值
+})
 app.model({
   namespace: 'count',
   state: 0,
@@ -62,7 +66,11 @@ app.start('#root')
 
 ```javascript
 import dva, { 
-    connect 
+    connect,
+    dynamic,
+    createBrowserHistory,
+    createHashHistory,
+    createMemoryHistory
 } from 'dva-vue'
 ```
 

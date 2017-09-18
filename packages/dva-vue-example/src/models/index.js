@@ -20,6 +20,7 @@ export default {
   subscriptions: {
     setup ({ dispatch, history }) {
       dispatch({type: 'getUser', payload: 'aaxcc'})
+      console.log(1)
     }
   }
 }

@@ -1,4 +1,9 @@
 export default {
   namespace: 'share',
-  state: {}
+  state: {},
+  subscriptions: {
+    setup ({ dispatch, history }) {
+      console.log(2)
+    }
+  }
 }

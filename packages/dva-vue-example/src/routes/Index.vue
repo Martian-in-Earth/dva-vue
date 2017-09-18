@@ -1,7 +1,7 @@
 <template>
     <div>
         <div @click="down">aa {{index.nickName}}</div>
-         <router-link to="share">share</router-link>
+         <dva-link to="share?c=b" replace>share</dva-link>
     </div>
 </template>
 <script>
@@ -9,7 +9,7 @@
     export default connect(({index}) => ({index}))({
       methods: {
         down () {
-          this.dispatch({type: 'index/getUser', payload: 'aa'}).then(()=>console.log('done'))
+          this.dispatch({type: 'index/getUser', payload: 'aa'}).then(() => console.log('done'))
         }
       }
     })
