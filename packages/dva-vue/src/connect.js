@@ -16,13 +16,18 @@ export default function connect (mapStateToComputed) {
         this.$root.constructor.util.defineReactive(this, key, computeds[`${key}`])
       })
     }
-    return {
-      ...component,
-      beforeCreate: Array.isArray(component.beforeCreate)
-        ? component.beforeCreate.concat(beforeCreate)
-        : isFunction(component.beforeCreate)
-          ? [component.beforeCreate, beforeCreate]
-          : beforeCreate
+    let _beforeCreate = Array.isArray(component.beforeCreate)
+      ? component.beforeCreate.concat(beforeCreate)
+      : isFunction(component.beforeCreate)
+        ? [component.beforeCreate, beforeCreate]
+        : beforeCreate
+    if (component._Ctor) {
+      // 实例化后注入    
+      component._Ctor[`${Object.keys(component._Ctor)[0]}`].options.beforeCreate = _beforeCreate
+    } else {
+      // 模版对象注入
+      component.beforeCreate = _beforeCreate
     }
+    return component
   }
 }

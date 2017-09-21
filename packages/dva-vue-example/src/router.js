@@ -1,4 +1,4 @@
-import { dynamic } from 'dva-vue'
+import { dynamic, connect } from 'dva-vue'
 const toFirUpper = word => word.replace(/(\w)\w+$/, (word, letter) => word.replace(letter, letter.toUpperCase()))
 export default function RouterConfig ({
   history,
@@ -10,7 +10,8 @@ export default function RouterConfig ({
       resolve(require(`./models/${modelUrl}`).default)
     }, 'router'))],
     component: () => new Promise(resolve => require.ensure([], () => {
-      resolve(require(`./routes/${(comptUrl || toFirUpper(modelUrl))}.vue`).default)
+      let compt = require(`./routes/${(comptUrl || toFirUpper(modelUrl))}.vue`).default
+      resolve(compt.connect ? connect(state => ({ [`${modelUrl}`]: state[`${modelUrl}`] }))(compt) : compt)
     }, 'router'))
   })
   return [{

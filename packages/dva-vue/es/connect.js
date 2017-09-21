@@ -1,5 +1,3 @@
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 import { isFunction } from 'dva-core/lib/utils';
 
 export default function connect(mapStateToComputed) {
@@ -20,8 +18,14 @@ export default function connect(mapStateToComputed) {
         _this.$root.constructor.util.defineReactive(_this, key, computeds['' + key]);
       });
     };
-    return _extends({}, component, {
-      beforeCreate: Array.isArray(component.beforeCreate) ? component.beforeCreate.concat(beforeCreate) : isFunction(component.beforeCreate) ? [component.beforeCreate, beforeCreate] : beforeCreate
-    });
+    var _beforeCreate = Array.isArray(component.beforeCreate) ? component.beforeCreate.concat(beforeCreate) : isFunction(component.beforeCreate) ? [component.beforeCreate, beforeCreate] : beforeCreate;
+    if (component._Ctor) {
+      // 实例化后注入    
+      component._Ctor['' + Object.keys(component._Ctor)[0]].options.beforeCreate = _beforeCreate;
+    } else {
+      // 模版对象注入
+      component.beforeCreate = _beforeCreate;
+    }
+    return component;
   };
 }
