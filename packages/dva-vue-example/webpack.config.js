@@ -1,5 +1,7 @@
+const join = require('path').join
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const assetsPath = (...relativePath) => join(__dirname, ...relativePath)
 module.exports = {
   devtool: 'source-map',
   entry: {
@@ -21,7 +23,8 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.js$/,
-      loader: 'babel-loader'
+      loader: 'babel-loader',
+      include: [assetsPath('src')]
     },
     {
       test: /\.vue$/,
