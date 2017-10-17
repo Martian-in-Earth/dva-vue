@@ -67,10 +67,7 @@ app.start('#root')
 ```javascript
 import dva, { 
     connect,
-    dynamic,
-    createBrowserHistory,
-    createHashHistory,
-    createMemoryHistory
+    dynamic
 } from 'dva-vue'
 ```
 
