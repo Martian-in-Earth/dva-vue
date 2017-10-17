@@ -11,9 +11,9 @@ function routerMiddleware(history) {
         if (action.type !== CALL_HISTORY_METHOD) {
           return next(action);
         }
-        var _action$payload = action.payload;
-        var method = _action$payload.method;
-        var args = _action$payload.args;
+        var payload = action.payload;
+        var method = payload.method,
+            args = payload.args;
 
         history[method].apply(history, args);
       };

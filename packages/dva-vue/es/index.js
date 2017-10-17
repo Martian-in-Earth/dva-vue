@@ -38,7 +38,7 @@ export default function () {
 
   var createOpts = {
     setupMiddlewares: function setupMiddlewares(middlewares) {
-      return [].concat(middlewares);
+      return [routerMiddleware(vueRouter.history)].concat(middlewares);
     },
     setupApp: function setupApp(app) {
       app._history = vueRouter.history;

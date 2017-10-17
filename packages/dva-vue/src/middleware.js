@@ -5,10 +5,8 @@ export function routerMiddleware (history) {
     if (action.type !== CALL_HISTORY_METHOD) {
       return next(action)
     }
-    var _action$payload = action.payload
-    var method = _action$payload.method
-    var args = _action$payload.args
-
+    const { payload } = action
+    const { method, args } = payload
     history[method].apply(history, args)
   }
 }

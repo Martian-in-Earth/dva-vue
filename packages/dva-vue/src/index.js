@@ -31,6 +31,7 @@ export default function (opts = {}) {
   const createOpts = {
     setupMiddlewares (middlewares) {
       return [
+        routerMiddleware(vueRouter.history),
         ...middlewares
       ]
     },
