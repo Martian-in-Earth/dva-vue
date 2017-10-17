@@ -1,16 +1,15 @@
 <template>
     <div>
-        <div @click="down">aa {{index.nickName}}</div>
-        <router-link to="share?c=b" replace>share</router-link>
+        <div @click="down">aa {{posts.nickName}}</div>
     </div>
 </template>
 <script>
-    export default {
-      connect: true,
+    import {connect} from 'dva-vue'
+    export default connect(({posts}) => ({posts}))({
       methods: {
         down () {
           this.dispatch({type: 'index/getUser', payload: 'aa'}).then(() => console.log('done'))
         }
       }
-    }
+    })
 </script>

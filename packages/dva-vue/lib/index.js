@@ -1,7 +1,7 @@
 'use strict';
 
 exports.__esModule = true;
-exports.createMemoryHistory = exports.createHashHistory = exports.createBrowserHistory = exports.dynamic = exports.connect = undefined;
+exports.dynamic = exports.connect = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -23,42 +23,20 @@ Object.defineProperty(exports, 'dynamic', {
   }
 });
 
-var _history = require('history');
-
-Object.defineProperty(exports, 'createBrowserHistory', {
-  enumerable: true,
-  get: function get() {
-    return _history.createBrowserHistory;
-  }
-});
-Object.defineProperty(exports, 'createHashHistory', {
-  enumerable: true,
-  get: function get() {
-    return _history.createHashHistory;
-  }
-});
-Object.defineProperty(exports, 'createMemoryHistory', {
-  enumerable: true,
-  get: function get() {
-    return _history.createMemoryHistory;
-  }
-});
-
 exports.default = function () {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-  var history = opts.history || (0, _history.createHashHistory)();
   var createOpts = {
     setupMiddlewares: function setupMiddlewares(middlewares) {
-      return [(0, _middleware.routerMiddleware)(history)].concat(middlewares);
+      return [].concat(middlewares);
     },
     setupApp: function setupApp(app) {
-      _vue2.default.use((0, _router2.Link)(history));
-      app._history = patchHistory(history);
+      app._history = vueRouter.history;
     }
   };
   var router = function router(_router) {
     (0, _invariant2.default)((0, _utils.isFunction)(_router), '[app.router] router should be function, but got ' + (typeof _router === 'undefined' ? 'undefined' : _typeof(_router)));
+    _vue2.default.use(_vueRouter2.default);
     app._router = _router;
   };
   var start = function start(container) {
@@ -87,6 +65,10 @@ var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
 
+var _vueRouter = require('vue-router');
+
+var _vueRouter2 = _interopRequireDefault(_vueRouter);
+
 var _invariant = require('invariant');
 
 var _invariant2 = _interopRequireDefault(_invariant);
@@ -99,8 +81,6 @@ var _utils = require('dva-core/lib/utils');
 
 var _middleware = require('./middleware');
 
-var _router2 = require('./router');
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -111,25 +91,14 @@ var isHTMLElement = function isHTMLElement(node) {
 var isString = function isString(str) {
   return typeof str === 'string';
 };
-var patchHistory = function patchHistory(history) {
-  var oldListen = history.listen;
-  history.listen = function (callback) {
-    callback(history.location);
-    return oldListen.call(history, callback);
-  };
-  return history;
-};
+var vueRouter = new _vueRouter2.default();
 var render = function render(container, store, app, router) {
+  vueRouter.addRoutes(router({ app: app, history: app._history }));
   var _app = new _vue2.default({
     store: store,
+    router: vueRouter,
     render: function render(h) {
-      return h(_router2.Router, {
-        props: {
-          history: app._history,
-          routes: router({ app: app, history: app._history }),
-          store: store
-        }
-      });
+      return h('router-view');
     }
   });
   // If has container, render; else, return vue component

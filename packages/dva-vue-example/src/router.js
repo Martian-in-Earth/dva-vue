@@ -19,6 +19,19 @@ export default function RouterConfig ({
     component: asyncComponent('index')
   }, {
     path: '/share',
-    component: asyncComponent('share')
+    component: asyncComponent('share'),
+    children: [
+      {
+        path: 'profile',
+        components: {
+          default: asyncComponent('profile'),
+          a: asyncComponent('posts')
+        }
+      },
+      {
+        path: 'posts',
+        component: asyncComponent('posts')
+      }
+    ]
   }]
 }

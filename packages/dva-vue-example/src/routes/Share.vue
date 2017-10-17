@@ -1,10 +1,12 @@
 <template>
     <div> {{share.c}}
-        <dva-link to="/?c=b">home</dva-link>
+        <router-link to="/?c=b">home</router-link>
+        <router-view></router-view>
+        <router-view name="a"></router-view>
     </div>
 </template>
 <script>
-    export default {
-      connect: true
-    }
+    import {connect} from 'dva-vue'
+    export default connect(({share}) => ({share}))({
+    })
 </script>

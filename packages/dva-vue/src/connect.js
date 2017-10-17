@@ -1,5 +1,11 @@
 import { isFunction } from 'dva-core/lib/utils'
 
+const pushBeforeCreate = (beforeCreate, item) => Array.isArray(beforeCreate)
+  ? beforeCreate.concat(item)
+  : isFunction(beforeCreate)
+    ? [beforeCreate, item]
+    : item
+
 export default function connect (mapStateToComputed) {
   return component => {
     let beforeCreate = function () {
@@ -16,17 +22,13 @@ export default function connect (mapStateToComputed) {
         this.$root.constructor.util.defineReactive(this, key, computeds[`${key}`])
       })
     }
-    let _beforeCreate = Array.isArray(component.beforeCreate)
-      ? component.beforeCreate.concat(beforeCreate)
-      : isFunction(component.beforeCreate)
-        ? [component.beforeCreate, beforeCreate]
-        : beforeCreate
     if (component._Ctor) {
+      let _Ctor = component._Ctor[`${Object.keys(component._Ctor)[0]}`]
       // 实例化后注入    
-      component._Ctor[`${Object.keys(component._Ctor)[0]}`].options.beforeCreate = _beforeCreate
+      _Ctor.options.beforeCreate = pushBeforeCreate(_Ctor.options.beforeCreate, beforeCreate)
     } else {
       // 模版对象注入
-      component.beforeCreate = _beforeCreate
+      component.beforeCreate = pushBeforeCreate(component.beforeCreate, beforeCreate)
     }
     return component
   }

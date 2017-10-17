@@ -8,7 +8,7 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
 [![MIT](https://img.shields.io/dub/l/vibe-d.svg?style=flat-square)](http://opensource.org/licenses/MIT)
 
-Official Vue bindings for dva, with [dva-core@1.0.1](https://github.com/dvajs/dva/tree/master/packages/dva-core) 、[history@4.7.2](https://github.com/ReactTraining/history)
+Official Vue bindings for dva, with [dva-core@1.1.0](https://github.com/dvajs/dva/tree/master/packages/dva-core) 、[vue-router@3.0.1](https://github.com/vuejs/vue-router)
 ## LICENSE
 
 MIT

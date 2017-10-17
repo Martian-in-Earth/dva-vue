@@ -1,35 +1,22 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import invariant from 'invariant'
 import * as core from 'dva-core'
 import { isFunction } from 'dva-core/lib/utils'
-import { createHashHistory } from 'history'
 import { routerMiddleware } from './middleware'
-import { Router, Link } from './router'
 export { default as connect } from './connect'
 export { default as dynamic } from './dynamic'
-export { createBrowserHistory, createHashHistory, createMemoryHistory } from 'history'
 
 const isHTMLElement = node => typeof node === 'object' && node !== null && node.nodeType && node.nodeName
 const isString = str => typeof str === 'string'
-const patchHistory = history => {
-  const oldListen = history.listen
-  history.listen = (callback) => {
-    callback(history.location)
-    return oldListen.call(history, callback)
-  }
-  return history
-}
+const vueRouter = new VueRouter()
 const render = (container, store, app, router) => {
+  vueRouter.addRoutes(router({ app, history: app._history }))
   let _app = new Vue({
     store,
+    router: vueRouter,
     render (h) {
-      return h(Router, {
-        props: {
-          history: app._history,
-          routes: router({ app, history: app._history }),
-          store: store
-        }
-      })
+      return h('router-view')
     }
   })
   // If has container, render; else, return vue component
@@ -41,21 +28,19 @@ const render = (container, store, app, router) => {
 }
 
 export default function (opts = {}) {
-  const history = opts.history || createHashHistory()
   const createOpts = {
     setupMiddlewares (middlewares) {
       return [
-        routerMiddleware(history),
         ...middlewares
       ]
     },
     setupApp (app) {
-      Vue.use(Link(history))
-      app._history = patchHistory(history)
+      app._history = vueRouter.history
     }
   }
   const router = router => {
     invariant(isFunction(router), `[app.router] router should be function, but got ${typeof router}`)
+    Vue.use(VueRouter)
     app._router = router
   }
   const start = container => {

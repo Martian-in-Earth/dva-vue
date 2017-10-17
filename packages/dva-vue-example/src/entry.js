@@ -6,17 +6,7 @@ app.model({
   state: {},
   subscriptions: {
     setup ({ dispatch, history }) {
-      return history.block(({pathname, search}, action) => {
-        if (action === 'REPLACE') {
-          return true
-        }
-        // 如果是in 则刷新 否则不改
-        if (/infashion/gi.test(window.navigator.userAgent)) {
-          location.hash = `${pathname}${search}`
-          location.reload()
-          return false
-        }
-      })
+      console.log(history)
     }
   }
 })
