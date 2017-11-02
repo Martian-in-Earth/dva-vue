@@ -57,7 +57,7 @@ exports.default = function () {
   var oldAppStart = app.start;
   app.router = router;
   app.start = start;
-  app.plugin = _vue2.default.use;
+  app.plugin = _vue2.default.use.bind(_vue2.default);
   return app;
 };
 

@@ -67,6 +67,6 @@ export default function () {
   var oldAppStart = app.start;
   app.router = router;
   app.start = start;
-  app.plugin = Vue.use;
+  app.plugin = Vue.use.bind(Vue);
   return app;
 }
