@@ -61,7 +61,7 @@ export default function () {
     invariant(app._router, '[app.start] router must be registered before app.start()');
     oldAppStart.call(app);
     var store = app._store;
-    render(container, store, app, app._router);
+    return render(container, store, app, app._router);
   };
   var app = core.create(opts, createOpts);
   var oldAppStart = app.start;
