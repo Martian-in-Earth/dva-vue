@@ -1,6 +1,6 @@
 {
   "name": "dva-nprogress",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Nprogress plugin for dva.",
   "repository": {
     "type": "git",
