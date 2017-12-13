@@ -1,4 +1,4 @@
-# dva-loading
+# dva-nprogress
 
 [![NPM version](https://img.shields.io/npm/v/dva-nprogress.svg?style=flat)](https://npmjs.org/package/dva-nprogress)
 [![NPM downloads](http://img.shields.io/npm/dm/dva-nprogress.svg?style=flat)](https://npmjs.org/package/dva-nprogress)
