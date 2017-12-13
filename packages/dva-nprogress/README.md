@@ -19,7 +19,7 @@ $ npm install dva-nprogress --save
 import nprogressDva from 'dva-nprogress';
 
 const app = dva();
-app.use(nprogressDva(['@@router/CALL_HISTORY_METHOD']));
+app.use(nprogressDva());
 ```
 
 Then we can access loading state from store.
