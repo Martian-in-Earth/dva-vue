@@ -1,8 +1,7 @@
 <template>
     <div>
-        <div @click="nav">aa {{index.nickName}}</div>
+        <div @click="nav">share</div>
         <div @click="down">aa {{index.nickName}}</div>
-        <router-link to="share?c=b" replace>share</router-link>
     </div>
 </template>
 <script>
