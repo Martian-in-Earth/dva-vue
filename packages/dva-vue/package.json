@@ -1,6 +1,6 @@
 {
   "name": "dva-vue",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "dva-vue",
   "main": "lib/index.js",
   "module": "es/index.js",
