@@ -8,8 +8,6 @@ var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-require('nprogress/nprogress.css');
-
 var _nprogress = require('nprogress');
 
 var _nprogress2 = _interopRequireDefault(_nprogress);

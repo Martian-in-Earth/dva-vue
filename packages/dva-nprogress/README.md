@@ -16,6 +16,7 @@ $ npm install dva-nprogress --save
 ## Usage
 
 ```javascript
+import 'nprogress/nprogress.css'
 import nprogressDva from 'dva-nprogress';
 
 const app = dva();

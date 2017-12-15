@@ -1,31 +1,33 @@
 {
-  "name": "dva-vue-example",
-  "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --hot"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dva-vue": "^0.0.10",
-    "dva-nprogress": "^0.0.1"
-  },
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-stage-0": "^6.24.1",
-    "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "html-webpack-plugin": "^2.30.1",
-    "style-loader": "^0.19.0",
-    "vue-loader": "^13.0.4",
-    "vue-template-compiler": "^2.4.2",
-    "webpack": "^3.5.6",
-    "webpack-dev-server": "^2.7.1"
+	"name": "dva-vue-example",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+	  "start": "webpack-dev-server --hot"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+	  "dva-vue": "^0.0.11",
+	  "dva-nprogress": "^0.0.3",
+	  "nprogress": "^0.2.0"
+	},
+	"devDependencies": {
+	  "babel-core": "^6.26.0",
+	  "babel-loader": "^7.1.2",
+	  "babel-plugin-transform-decorators-legacy": "^1.3.4",
+	  "babel-plugin-transform-runtime": "^6.23.0",
+	  "babel-preset-env": "^1.6.0",
+	  "babel-preset-stage-0": "^6.24.1",
+	  "css-loader": "^0.28.7",
+	  "extract-text-webpack-plugin": "^3.0.2",
+	  "html-webpack-plugin": "^2.30.1",
+	  "style-loader": "^0.19.0",
+	  "vue-loader": "^13.0.4",
+	  "vue-template-compiler": "^2.4.2",
+	  "webpack": "^3.5.6",
+	  "webpack-dev-server": "^2.7.1"
+	}
   }
-}
+  

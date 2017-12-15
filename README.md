@@ -41,7 +41,7 @@ $ npm install --save dva-vue
         add () {
           this.dispatch({type: 'count/add'}).then(()=>console.log('done'))
         }
-      }
+      } 
     })
 </script>
 ```
