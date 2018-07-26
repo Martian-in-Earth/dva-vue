@@ -10,7 +10,8 @@
 
 [![NPM](https://nodei.co/npm/dva-vue.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/dva-vue/)
 
-> Lightweight front-end framework based on [dva-core](https://github.com/dvajs/dva/tree/master/packages/dva-core) and [history](https://github.com/ReactTraining/history)
+> Lightweight front-end framework based on [dva-core](https://github.com/dvajs/dva/tree/master/packages/dva-core) and [history](https://github.com/ReactTraining/history)    
+> What's [dva.js](https://dvajs.com/)? 
 
 ## Demos & Plugins
 
