@@ -1,6 +1,7 @@
 const join = require('path').join
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const assetsPath = (...relativePath) => join(__dirname, ...relativePath)
 module.exports = {
   devtool: 'source-map',
@@ -25,14 +26,22 @@ module.exports = {
       test: /\.js$/,
       loader: 'babel-loader',
       include: [assetsPath('src')]
-    },
-    {
+    }, {
       test: /\.vue$/,
       loader: 'vue-loader'
-    }
-    ]
+    }, {
+      test: /\.css$/,
+      use: ExtractTextPlugin.extract({
+        fallback: 'style-loader',
+        use: [`css-loader`]
+      })
+    }]
   },
   plugins: [
+    new ExtractTextPlugin({
+      allChunks: true,
+      filename: 'css/[name].css'
+    }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.HashedModuleIdsPlugin(),

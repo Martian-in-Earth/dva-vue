@@ -56,12 +56,12 @@ export default function (opts = {}) {
     invariant(app._router, `[app.start] router must be registered before app.start()`)
     oldAppStart.call(app)
     const store = app._store
-    render(container, store, app, app._router)
+    return render(container, store, app, app._router)
   }
   const app = core.create(opts, createOpts)
   const oldAppStart = app.start
   app.router = router
   app.start = start
-  app.plugin = Vue.use
+  app.plugin = Vue.use.bind(Vue)
   return app
 }

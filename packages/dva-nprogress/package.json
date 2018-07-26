@@ -1,0 +1,39 @@
+{
+  "name": "dva-nprogress",
+  "version": "0.0.4",
+  "description": "Nprogress plugin for dva.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jetsly/dva-vue.git"
+  },
+  "author": "jetsly@live.cn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Jetsly/dva-vue/issues"
+  },
+  "homepage": "https://github.com/Jetsly/dva-vue#readme",
+  "keywords": [
+    "dva",
+    "dva-plugin",
+    "nprogress"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src --out-dir lib"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "dependencies": {
+    "nprogress": "^0.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-stage-0": "^6.24.1"
+  }
+}

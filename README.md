@@ -14,6 +14,7 @@
 
 ## Demos & Plugins
 
+- [dva-nprogress](https://github.com/Jetsly/dva-vue/tree/master/packages/dva-nprogress): dva-vue plugin
 - [dva-vue-example](https://github.com/Jetsly/dva-vue/tree/master/packages/dva-vue-example): dva-vue demos
 
 ---
@@ -40,7 +41,7 @@ $ npm install --save dva-vue
         add () {
           this.dispatch({type: 'count/add'}).then(()=>console.log('done'))
         }
-      }
+      } 
     })
 </script>
 ```
