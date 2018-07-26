@@ -48,6 +48,9 @@ $ npm install --save dva-vue
 ```javascript
 import dva, { createHashHistory } from 'dva-vue'
 import App from 'App.vue'
+
+const delay = ms => new Promise((resolve, reject) => setTimeout(() => resolve(), ms))
+
 const app = dva({
   history: createHashHistory() // 默认值
 })
@@ -57,6 +60,13 @@ app.model({
   reducers: {
     add (state, { payload }) { return state + payload || 1 },
     minus (state, { payload }) { return state - payload || 1 }
+  },
+  effects: {
+    * asyncAdd(_, {call, put}){
+      // as some fetch action
+      yield delay(1000)
+      yield put({type: 'add', payload: 1})
+    }
   }
 })
 app.router(() => [{ path: '/', component: App }])
