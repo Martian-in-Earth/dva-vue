@@ -40,7 +40,10 @@ $ npm install --save dva-vue
     export default connect(({count}) => ({count}))({
       methods: {
         add () {
-          this.dispatch({type: 'count/add'}).then(()=>console.log('done'))
+          this.dispatch({type: 'count/add'})
+        },
+        asyncAdd () {
+          this.dispatch({type: 'count/asyncAdd'}).then(()=>console.log('done'))
         }
       } 
     })
